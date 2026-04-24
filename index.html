@@ -471,6 +471,24 @@
     }
     .stakes-stat.in .stakes-stat-bar-fill { transform: scaleX(1); }
     .stakes-stat-label-bottom { font-size: 13px; color: var(--ink-4); line-height: 1.7; }
+    .stat-year-tabs {
+      display: flex; gap: 5px; justify-content: center;
+      margin-bottom: 16px; flex-wrap: wrap;
+    }
+    .stat-year-tab {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+      padding: 4px 10px; border-radius: 20px;
+      border: 1.5px solid var(--hairline);
+      background: transparent; color: var(--ink-3); cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+      font-family: inherit;
+    }
+    .stat-year-tab.active {
+      background: var(--accent); border-color: var(--accent); color: #fff;
+    }
+    .stat-year-tab:hover:not(.active) {
+      border-color: var(--accent); color: var(--accent);
+    }
 
     .stakes-punch-row {
       margin-top: 64px;
@@ -1160,11 +1178,18 @@
           半年多，要從零建立整套備考邏輯。<br>
           時間，根本不夠。</p>
         </div>
-        <div class="stakes-stat reveal">
-          <div class="stakes-stat-label-top">115 年全台考生拿到<br>數A 15 級分</div>
-          <div class="stakes-stat-num" data-counter="1.23" data-decimals="2">0.00<span class="pct">%</span></div>
-          <div class="stakes-stat-bar"><div class="stakes-stat-bar-fill"></div></div>
-          <div class="stakes-stat-label-bottom">想進台大電機・資工<br>就要擠入這 1.23%</div>
+        <div class="stakes-stat reveal" id="stakes-stat-widget">
+          <div class="stat-year-tabs">
+            <button class="stat-year-tab active" data-year="115" data-val="1.23">115 年</button>
+            <button class="stat-year-tab" data-year="114" data-val="1.35">114 年</button>
+            <button class="stat-year-tab" data-year="113" data-val="1.50">113 年</button>
+            <button class="stat-year-tab" data-year="112" data-val="1.54">112 年</button>
+            <button class="stat-year-tab" data-year="111" data-val="0.99">111 年</button>
+          </div>
+          <div class="stakes-stat-label-top"><span id="stat-year-label">115</span> 年全台考生拿到<br>數A 15 級分</div>
+          <div class="stakes-stat-num" id="stakes-stat-num">1.23<span class="pct">%</span></div>
+          <div class="stakes-stat-bar"><div class="stakes-stat-bar-fill" id="stakes-stat-bar-fill"></div></div>
+          <div class="stakes-stat-label-bottom">想進台大電機・資工<br>就要擠入這 <span id="stat-pct-bottom">1.23</span>%</div>
         </div>
       </div>
       <div class="stakes-punch-row reveal">
@@ -1474,6 +1499,38 @@
       }
       requestAnimationFrame(tick);
     }
+
+    // ─────────────── Year tabs widget ───────────────
+    (function() {
+      const tabs = document.querySelectorAll('.stat-year-tab');
+      const numEl = document.getElementById('stakes-stat-num');
+      const barFill = document.getElementById('stakes-stat-bar-fill');
+      const yearLabel = document.getElementById('stat-year-label');
+      const pctBottom = document.getElementById('stat-pct-bottom');
+      function animateNum(target) {
+        const duration = 500;
+        const suffix = '<span class="pct">%</span>';
+        const start = performance.now();
+        function tick(now) {
+          const p = Math.min(1, (now - start) / duration);
+          const eased = 1 - Math.pow(1 - p, 3);
+          numEl.innerHTML = (target * eased).toFixed(2) + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          const val = parseFloat(tab.dataset.val);
+          yearLabel.textContent = tab.dataset.year;
+          pctBottom.textContent = val.toFixed(2);
+          barFill.style.width = val + '%';
+          animateNum(val);
+        });
+      });
+    })();
 
     // ─────────────── Nav scroll state ───────────────
     const nav = document.getElementById('topNav');
