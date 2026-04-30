@@ -279,8 +279,8 @@
     }
     .hero-photo-frame {
       position: relative;
-      width: 100%; max-width: 520px;
-      aspect-ratio: 4 / 5;
+      width: 100%; max-width: 416px;
+      aspect-ratio: 4 / 4;
       border-radius: var(--r-xl);
       overflow: hidden;
       background:
@@ -288,16 +288,13 @@
       box-shadow: var(--shadow-lg);
     }
     .hero-photo-frame img {
-      width: calc(97% * var(--photo-scale, 1.5));
-      height: calc(97% * var(--photo-scale, 1.5));
-      object-fit: contain;
-      object-position: center bottom;
-      display: block;
-      margin: auto;
       position: absolute;
-      left: 50%; bottom: 0;
-      transform: translateX(-50%);
-      mix-blend-mode: multiply;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
     }
     .hero-photo-placeholder {
       position: absolute; inset: 0;
@@ -332,14 +329,7 @@
       box-shadow: var(--shadow-md);
     }
     .hero-photo-badge {
-      position: absolute;
-      bottom: 20px; left: 20px;
-      background: var(--bg);
-      border-radius: 14px;
-      padding: 12px 16px;
-      box-shadow: var(--shadow-md);
-      display: flex; align-items: center; gap: 10px;
-      z-index: 2;
+      display: none;
     }
     .hero-photo-badge .dot {
       width: 8px; height: 8px; border-radius: 50%; background: var(--accent);
@@ -1138,10 +1128,10 @@
 
     <div class="hero-photo-col reveal">
       <div class="hero-photo-frame">
-        <img alt="解創智老師" id="teacherImg" src="teacher3.png" />
+        <img alt="解創智老師" id="teacherImg" src="teacher4.png" />
         <div class="hero-photo-placeholder" style="display:none;">
           <div class="silhouette">👨‍🏫</div>
-          <span class="mono">[ teacher3.png ]</span>
+          <span class="mono">[ teacher4.png ]</span>
           <span style="font-size:12px;color:var(--ink-4);">請上傳老師照片</span>
         </div>
         <div class="hero-photo-badge">
@@ -1260,23 +1250,6 @@
           <div class="quote-attr">成大醫科同學</div>
           <blockquote>「全部幫我們打掉重練，感覺到重新學習的一個<strong>非常紮實的基礎</strong>。」</blockquote>
           <div class="quote-attr">陽明醫科同學</div>
-        </div>
-      </div>
-      <div class="guide-video-secondary reveal">
-        <a class="guide-video-wrap" href="https://www.youtube.com/watch?v=CHmxejKZoXY" target="_blank" rel="noopener" aria-label="觀看學生心得影片">
-          <img src="https://img.youtube.com/vi/CHmxejKZoXY/maxresdefault.jpg" alt="APEX 學生心得" />
-          <div class="guide-video-play">
-            <div class="guide-video-play-btn">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M8 5.14v14l11-7-11-7z" fill="#7C3AED"/>
-              </svg>
-            </div>
-          </div>
-        </a>
-        <div class="guide-video-secondary-text">
-          <div class="guide-video-secondary-label">學生心得</div>
-          <h4>真實學生分享<br>三年後的改變</h4>
-          <p>從對數學沒有信心，到學測數A拿到理想成績——聽聽走過這段路的同學怎麼說。</p>
         </div>
       </div>
     </div>
