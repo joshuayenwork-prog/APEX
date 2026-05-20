@@ -668,6 +668,8 @@
     a.guide-video-wrap {
       display: block; position: relative; overflow: hidden;
       text-decoration: none;
+      aspect-ratio: 16 / 9;
+      background: #000;
     }
     a.guide-video-wrap img {
       width: 100%; height: 100%; object-fit: cover;
@@ -1236,10 +1238,14 @@
         <p class="section-sub">深耕數學教育 <strong>30 年</strong>。<br>以「打底建構、超前學習」為核心<br>帶出無數醫牙、電資學生。</p>
       </div>
       <div class="guide-video-block reveal">
-        <div class="guide-video-wrap">
-          <iframe src="https://www.youtube.com/embed/2MDNehWOWjc"
-            title="解創智老師介紹" allowfullscreen></iframe>
-        </div>
+        <a class="guide-video-wrap" href="https://www.youtube.com/watch?v=2MDNehWOWjc" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/2MDNehWOWjc/maxresdefault.jpg" alt="解創智老師介紹影片" />
+          <div class="guide-video-play">
+            <div class="guide-video-play-btn">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="margin-left:3px;color:var(--accent)"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+        </a>
         <div class="guide-video-text">
           <blockquote>「不管學生用什麼角度切入，老師都能立刻抓住思路、給出清晰的答案——同一題，還會再多給幾種解法，讓學生找到最快、最順手的那條路。」</blockquote>
           <div class="quote-attr">台大醫科同學</div>
